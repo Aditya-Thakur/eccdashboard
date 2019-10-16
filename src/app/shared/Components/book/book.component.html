@@ -1,0 +1,63 @@
+<br>
+<div class="container mybox">
+  <div class="row">
+    <!-- <div class="col-md-12 userMessage">{{user.message}}</div> -->
+  </div>
+  <div class="row justify-content-center">
+    <div class="text-center mr-auto">
+      <div class="card bg-info text-white">
+        <!-- Login form starts -->
+        <form *ngIf="showBookingForm" class="form" [formGroup]="bookForm" autocomplete="off">
+          <div class="card-header">
+            <div class="container">
+              <div class="row text-center">
+                Check in for a new guest
+              </div>
+            </div>
+          </div>
+          <div class="card-body form-active">
+            <div class="form-group">
+              <label>Choose ECC</label>
+              <input type="text" class="form-control" formControlName="eccNo">
+              <div
+                *ngIf="bookForm.controls.eccNo.invalid && (bookForm.controls.eccNo.dirty || bookForm.controls.eccNo.touched)"
+                class="alert alert-warning">
+                <div *ngIf="bookForm.controls.eccNo.errors.required">
+                  ECC No is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Choose in available rooms!</label>
+              <input type="text" class="form-control" formControlName="roomNo">
+              <div
+                *ngIf="bookForm.controls.roomNo.invalid && (bookForm.controls.roomNo.dirty || bookForm.controls.roomNo.touched)"
+                class="alert alert-warning">
+                <div *ngIf="bookForm.controls.roomNo.errors.required">
+                  Room No is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Enter Employee Id: </label>
+              <input type="text" class="form-control" formControlName="employeeId">
+              <div
+                *ngIf="bookForm.controls.employeeId.invalid && (bookForm.controls.employeeId.dirty || bookForm.controls.employeeId.touched)"
+                class="alert alert-warning">
+                <div *ngIf="bookForm.controls.employeeId.errors.required">
+                  Employee Id is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer col text-center">
+            <button type="submit" [disabled]="bookForm.invalid" class="btn btn-success"
+              (click)="book()">Book</button><br><br>
+            <div *ngIf="showErrorMessage" class="alert alert-danger">Something is wrong! Try again!</div>
+          </div>
+        </form>
+        <!-- Login form ends -->
+      </div>
+    </div>
+  </div>
+</div>

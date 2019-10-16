@@ -1,0 +1,55 @@
+<br>
+<div class="container mybox">
+  <div class="row">
+    <!-- <div class="col-md-12 userMessage">{{user.message}}</div> -->
+  </div>
+  <div class="row justify-content-center">
+    <div class="text-center mr-auto">
+      <div class="card bg-info text-white">
+        <!-- Login form starts -->
+        <form *ngIf="showAddEccForm" class="form" [formGroup]="addEccForm" autocomplete="off">
+          <div class="card-header">
+            <div class="container">
+              <div class="row text-center">
+                Add a new ECC Record
+              </div>
+            </div>
+          </div>
+          <div class="card-body form-active">
+            <div class="form-group">
+              <label>ECC No.</label>
+              <input type="text" class="form-control" formControlName="eccNo">
+              <div
+                *ngIf="addEccForm.controls.eccNo.invalid && (addEccForm.controls.eccNo.dirty || addEccForm.controls.eccNo.touched)"
+                class="alert alert-warning">
+                <div *ngIf="addEccForm.controls.eccNo.errors.required">
+                  ECC No is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>No. of rooms!</label>
+              <input type="text" class="form-control" formControlName="noOfRooms">
+              <div
+                *ngIf="addEccForm.controls.noOfRooms.invalid && (addEccForm.controls.noOfRooms.dirty || addEccForm.controls.noOfRooms.touched)"
+                class="alert alert-warning">
+                <div *ngIf="addEccForm.controls.noOfRooms.errors.required">
+                  No of rooms is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer col text-center">
+            <button type="submit" [disabled]="addEccForm.invalid" class="btn btn-success"
+              (click)="addEccRecord()">Add</button><br><br>
+            <div *ngIf="showErrorMessage" class="alert alert-danger">Something is wrong! Try again!</div>
+          </div>
+        </form>
+        <!-- Login form ends -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <span *ngIf="msg != null">{{msg}}</span>
+  </div>
+</div>
