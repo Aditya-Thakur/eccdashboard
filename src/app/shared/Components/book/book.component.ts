@@ -33,14 +33,16 @@ export class BookComponent implements OnInit {
       ]),
       employeeId: new FormControl('',
         [
-          Validators.required
+          Validators.required,
+          Validators.pattern('[0-9]{3,8}')
         ]
       )
     });
     this.unbookForm = new FormGroup({
       employeeId: new FormControl('',
         [
-          Validators.required
+          Validators.required,
+          Validators.pattern('[0-9]{3,8}')
         ]
       )
     });

@@ -59,6 +59,9 @@
               <div *ngIf="bookForm.controls.employeeId.errors.required">
                 Employee Id is required.
               </div>
+              <div *ngIf="bookForm.controls.employeeId.errors.pattern">
+                  Employee Id should be valid.
+                </div>
             </div>
           </div>
         </div>
@@ -94,6 +97,9 @@
               <div *ngIf="unbookForm.controls.employeeId.errors.required">
                 Employee Id is required.
               </div>
+              <div *ngIf="unbookForm.controls.employeeId.errors.pattern">
+                  Employee Id should be valid.
+                </div>
             </div>
           </div>
           <button type="submit" [disabled]="unbookForm.controls.employeeId.invalid" class="btn btn-success"
