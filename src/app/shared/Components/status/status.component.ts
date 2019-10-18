@@ -41,7 +41,7 @@ export class StatusComponent implements OnInit {
 
   async updateEccRecord() {
     this.updateEccForm.value.eccNo = this.eccNoToEdit;
-    this.adminService.updateEccRecord(this.updateEccForm.value).subscribe(
+    await this.adminService.updateEccRecord(this.updateEccForm.value).subscribe(
       (res) => {
         this.msg = res;
         this.editData = false;
