@@ -18,7 +18,11 @@
           <div class="card-body form-active">
             <div class="form-group">
               <label>Choose ECC</label>
-              <input type="text" class="form-control" formControlName="eccNo">
+              <select class="form-control" name="eccNo" formControlName="eccNo" (change)="getRoom($event.target.value)">
+                  <option value="" selected disabled>Choose ECC
+                    </option>
+                    <option *ngFor="let ecc of listOfEcc" value="{{ecc.eccNo}}">{{ecc.eccNo}}</option>
+                    </select>
               <div
                 *ngIf="bookForm.controls.eccNo.invalid && (bookForm.controls.eccNo.dirty || bookForm.controls.eccNo.touched)"
                 class="alert alert-warning">
@@ -29,7 +33,11 @@
             </div>
             <div class="form-group">
               <label>Choose in available rooms!</label>
-              <input type="text" class="form-control" formControlName="roomNo">
+              <select class="form-control" name="roomNo" formControlName="roomNo">
+                  <option value="" selected disabled>Choose Room No.
+                    </option>
+                    <option *ngFor="let roomNo of selectedEccCapacity" value="{{roomNo}}">{{roomNo}}</option>
+                    </select>
               <div
                 *ngIf="bookForm.controls.roomNo.invalid && (bookForm.controls.roomNo.dirty || bookForm.controls.roomNo.touched)"
                 class="alert alert-warning">
@@ -60,4 +68,7 @@
       </div>
     </div>
   </div>
+  <div class="row">
+      <span class="bg-warn text-danger" *ngIf="msg != null">{{msg}}</span>
+    </div>
 </div>
