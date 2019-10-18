@@ -18,6 +18,14 @@ export class BookService {
       catchError(this.handleError));
   }
 
+  unbook(data) {
+    return this.http.post(`http://localhost:3000/book/unbook`, data).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     console.log(error);
     // return an observable with a user friendly message

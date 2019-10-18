@@ -1,74 +1,123 @@
 <br>
 <div class="container mybox">
   <div class="row">
-    <!-- <div class="col-md-12 userMessage">{{user.message}}</div> -->
-  </div>
-  <div class="row justify-content-center">
-    <div class="text-center mr-auto">
-      <div class="card bg-info text-white">
-        <!-- Login form starts -->
-        <form *ngIf="showBookingForm" class="form" [formGroup]="bookForm" autocomplete="off">
-          <div class="card-header">
-            <div class="container">
-              <div class="row text-center">
-                Check in for a new guest
+    <div class="card bg-info text-white">
+      <!-- Check In form starts -->
+      <form *ngIf="showBookingForm" class="form" [formGroup]="bookForm" autocomplete="off">
+        <div class="card-header">
+          <div class="container">
+            <div class="row">
+              <div [ngClass]="{'card-title': true, 'form-active':showBookingForm, 'col-md-6':true, 'text-center':true}"
+                (click)="signUpClicked()">
+                <a>Check In</a>
+              </div>
+              <div
+                [ngClass]="{'card-title': true, 'form-active':  showUnbookingForm , 'col-md-6':true, 'text-center':true}"
+                (click)="signUpClicked()">
+                <a>Check Out</a>
               </div>
             </div>
           </div>
-          <div class="card-body form-active">
-            <div class="form-group">
-              <label>Choose ECC</label>
-              <select class="form-control" name="eccNo" formControlName="eccNo" (change)="getRoom($event.target.value)">
-                  <option value="" selected disabled>Choose ECC
-                    </option>
-                    <option *ngFor="let ecc of listOfEcc" value="{{ecc.eccNo}}">{{ecc.eccNo}}</option>
-                    </select>
-              <div
-                *ngIf="bookForm.controls.eccNo.invalid && (bookForm.controls.eccNo.dirty || bookForm.controls.eccNo.touched)"
-                class="alert alert-warning">
-                <div *ngIf="bookForm.controls.eccNo.errors.required">
-                  ECC No is required.
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Choose in available rooms!</label>
-              <select class="form-control" name="roomNo" formControlName="roomNo">
-                  <option value="" selected disabled>Choose Room No.
-                    </option>
-                    <option *ngFor="let roomNo of selectedEccCapacity" value="{{roomNo}}">{{roomNo}}</option>
-                    </select>
-              <div
-                *ngIf="bookForm.controls.roomNo.invalid && (bookForm.controls.roomNo.dirty || bookForm.controls.roomNo.touched)"
-                class="alert alert-warning">
-                <div *ngIf="bookForm.controls.roomNo.errors.required">
-                  Room No is required.
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Enter Employee Id: </label>
-              <input type="text" class="form-control" formControlName="employeeId">
-              <div
-                *ngIf="bookForm.controls.employeeId.invalid && (bookForm.controls.employeeId.dirty || bookForm.controls.employeeId.touched)"
-                class="alert alert-warning">
-                <div *ngIf="bookForm.controls.employeeId.errors.required">
-                  Employee Id is required.
-                </div>
+        </div>
+        <div class="card-body form-active">
+          <div class="form-group">
+            <label>Choose ECC</label>
+            <select class="form-control" name="eccNo" formControlName="eccNo" (change)="getRoom($event.target.value)">
+              <option value="" selected disabled>Choose ECC
+              </option>
+              <option *ngFor="let ecc of listOfEcc" value="{{ecc.eccNo}}">{{ecc.eccNo}}</option>
+            </select>
+            <div
+              *ngIf="bookForm.controls.eccNo.invalid && (bookForm.controls.eccNo.dirty || bookForm.controls.eccNo.touched)"
+              class="alert alert-warning">
+              <div *ngIf="bookForm.controls.eccNo.errors.required">
+                ECC No is required.
               </div>
             </div>
           </div>
-          <div class="card-footer col text-center">
-            <button type="submit" [disabled]="bookForm.invalid" class="btn btn-success"
-              (click)="book()">Book</button><br><br>
-            <div *ngIf="showErrorMessage" class="alert alert-danger">Something is wrong! Try again!</div>
+          <div class="form-group">
+            <label>Choose in available rooms!</label>
+            <select class="form-control" name="roomNo" formControlName="roomNo">
+              <option value="" selected disabled>Choose Room No.
+              </option>
+              <option *ngFor="let roomNo of selectedEccCapacity" value="{{roomNo}}">{{roomNo}}</option>
+            </select>
+            <div
+              *ngIf="bookForm.controls.roomNo.invalid && (bookForm.controls.roomNo.dirty || bookForm.controls.roomNo.touched)"
+              class="alert alert-warning">
+              <div *ngIf="bookForm.controls.roomNo.errors.required">
+                Room No is required.
+              </div>
+            </div>
           </div>
-        </form>
-        <!-- Login form ends -->
-      </div>
+          <div class="form-group">
+            <label>Enter Employee Id: </label>
+            <input type="text" class="form-control" formControlName="employeeId">
+            <div
+              *ngIf="bookForm.controls.employeeId.invalid && (bookForm.controls.employeeId.dirty || bookForm.controls.employeeId.touched)"
+              class="alert alert-warning">
+              <div *ngIf="bookForm.controls.employeeId.errors.required">
+                Employee Id is required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer col text-center">
+          <button type="submit" [disabled]="bookForm.invalid" class="btn btn-success" (click)="book()">Check In</button>
+        </div>
+      </form>
+      <!-- Check In form ends -->
+      <!-- Check Out form starts -->
+      <form *ngIf="showUnbookingForm " class="form" [formGroup]="unbookForm">
+        <div class="card-header">
+          <div class="container">
+            <div class="row">
+              <div [ngClass]="{'card-title': true, 'form-active':showBookingForm, 'col-md-6':true, 'text-center':true}"
+                (click)="signUpClicked()">
+                <a>Check In</a>
+              </div>
+              <div
+                [ngClass]="{'card-title': true, 'form-active':  showUnbookingForm , 'col-md-6':true, 'text-center':true}"
+                (click)="signUpClicked()">
+                <a>Check Out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body form-active">
+          <div class="form-group">
+            <label>Enter Employee Id: </label>
+            <input type="text" class="form-control" formControlName="employeeId">
+            <div
+              *ngIf="unbookForm.controls.employeeId.invalid && (unbookForm.controls.employeeId.dirty || unbookForm.controls.employeeId.touched)"
+              class="alert alert-warning">
+              <div *ngIf="unbookForm.controls.employeeId.errors.required">
+                Employee Id is required.
+              </div>
+            </div>
+          </div>
+          <button type="submit" [disabled]="unbookForm.controls.employeeId.invalid" class="btn btn-success"
+            (click)="getDetails()">Get Details</button>
+          <div class="bg-info text-warning" *ngIf="currentBooking != null && error == null">
+            <div>Details found: </div>
+            <div> Employee Id - {{currentBooking.employeeId}}</div>
+            <div> Ecc No. - {{currentBooking.eccNo}}</div>
+            <div> Room No. - {{currentBooking.roomNo}}</div>
+          </div>
+          <div *ngIf="error != null">
+            <div>{{error}}</div>
+          </div>
+        </div>
+        <div class="card-footer col text-center">
+          <button type="submit" [disabled]="currentBooking == null" class="btn btn-success" (click)="unbook()">Check
+            Out</button>
+        </div>
+      </form>
+      <!-- Check Out form ends -->
     </div>
   </div>
+
   <div class="row">
-      <span class="bg-warn text-danger" *ngIf="msg != null">{{msg}}</span>
-    </div>
+    <span *ngIf="msg != null">{{msg}}</span>
+  </div>
 </div>

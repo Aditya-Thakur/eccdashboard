@@ -19,18 +19,32 @@
                 <tr>
                   <th>ECC No.</th>
                   <th>No. of Rooms</th>
+                  <th>Update</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let ecc of eccList">
                   <td>{{ecc.eccNo}}</td>
-                  <td>{{ecc.noOfRooms}}</td>
+                  <td> 
+                      <form *ngIf="editData && ecc.eccNo == eccNoToEdit"  [formGroup]="updateEccForm">
+                        <input type="text" value="{{ecc.noOfRooms}}" formControlName="noOfRooms">
+                        <div
+                        *ngIf="updateEccForm.controls.noOfRooms.invalid && (updateEccForm.controls.noOfRooms.dirty || updateEccForm.controls.noOfRooms.touched)"
+                        class="alert alert-warning">
+                        <div *ngIf="updateEccForm.controls.noOfRooms.errors.required">
+                          No of rooms is required.
+                        </div></div>
+                      </form>
+                      <span *ngIf="showData && ecc.eccNo != eccNoToEdit">{{ecc.noOfRooms}}</span>
+                    </td>
+                  <td><i class="fa fa-edit" (click)="edit(ecc.eccNo)"></i></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="card-footer col text-center">
-            Total No. of ECC:- {{eccList.length}}
+            <span *ngIf="!editData">Total No. of ECC:- {{eccList.length}}</span>
+            <button *ngIf="editData" type="submit" class="btn btn-warning" (click)="updateEccRecord()">Update no of rooms for Ecc: {{eccNoToEdit}}</button>
           </div>
       </div>
     </div>

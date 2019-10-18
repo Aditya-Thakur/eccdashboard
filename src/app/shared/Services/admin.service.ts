@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
-export interface ECC {
-  eccNo: number;
-  noOfRooms: number;
-}
+import { Ecc } from 'src/app/models/ecc';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +11,16 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  addEccRecord(data: ECC) {
+  addEccRecord(data: Ecc) {
     return this.http.post(`http://localhost:3000/ecc/insertECC`, data).pipe(
+      map((res) => {
+        return res;
+      }),
+      catchError(this.handleError));
+  }
+
+  updateEccRecord(data) {
+    return this.http.post(`http://localhost:3000/ecc/updateECC`, data).pipe(
       map((res) => {
         return res;
       }),
