@@ -70,6 +70,7 @@ export class BookComponent implements OnInit {
     this.bookService.book(this.bookForm.value).subscribe(
       (res) => {
         this.msg = res;
+        this.bookForm.reset();
       }
     );
   }
@@ -81,6 +82,7 @@ export class BookComponent implements OnInit {
       (res) => {
         this.msg = res;
         this.currentBooking = null;
+        this.unbookForm.reset();
       }
     );
   }

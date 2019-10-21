@@ -33,7 +33,15 @@
                         class="alert alert-warning">
                         <div *ngIf="updateEccForm.controls.noOfRooms.errors.required">
                           No of rooms is required.
-                        </div></div>
+                        </div>
+                        <div
+              *ngIf="updateEccForm.controls.noOfRooms.invalid && (updateEccForm.controls.noOfRooms.dirty || updateEccForm.controls.noOfRooms.touched)"
+              class="alert alert-warning">
+              <div *ngIf="updateEccForm.controls.noOfRooms.errors.pattern">
+                Room No should be valid.
+              </div>
+            </div>
+                      </div>
                       </form>
                       <span *ngIf="showData && ecc.eccNo != eccNoToEdit">{{ecc.noOfRooms}}</span>
                     </td>

@@ -26,7 +26,8 @@ export class StatusComponent implements OnInit {
         ]
       ),
       noOfRooms: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('[0-9]{1,8}')
       ])
     });
   }
