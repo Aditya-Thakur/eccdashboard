@@ -14,6 +14,7 @@ export class BookService {
   book(data) {
     return this.http.post(`http://localhost:3000/book/bookNewRoom`, data).toPromise()
     .then( res => {
+      console.log(res);
       return res;
     })
     .catch(err => this.handleError(err));

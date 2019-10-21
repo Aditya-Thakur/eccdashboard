@@ -21,6 +21,11 @@ export class BookComponent implements OnInit {
   availableNoOfRooms = 0;
   selectedEccCapacity;
   currentBooking: Book;
+  successfulBooking: Book = {
+    employeeId : 0,
+    eccNo: 0,
+    roomNo: 0
+  };
   constructor(private dataService: DataService, private bookService: BookService) {
     this.bookForm = new FormGroup({
       eccNo: new FormControl('',
@@ -70,7 +75,17 @@ export class BookComponent implements OnInit {
     try {
       this.bookService.book(this.bookForm.value).then(
         res => {
-          this.msg = JSON.stringify(res);
+          let myRes;
+          myRes = res;
+          console.log(myRes);
+          this.successfulBooking.employeeId = myRes.employeeId;
+          this.successfulBooking.roomNo = myRes.roomNo;
+          this.successfulBooking.eccNo = myRes.eccNo;
+          this.msg = 'Booking successful for Employee No. ' +
+                      this.successfulBooking.employeeId + ' in Ecc No. - ' +
+                      this.successfulBooking.eccNo + ' in Room no. ' +
+                      this.successfulBooking.roomNo + '.';
+          // Cleaning the form for next input
           this.bookForm.reset();
         }
       );
