@@ -48,7 +48,7 @@ export class BookComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
+   ngOnInit() {
     this.dataService.getEccRecord().subscribe((res: Ecc[]) => {
       this.listOfEcc = res;
     });
@@ -67,20 +67,24 @@ export class BookComponent implements OnInit {
   book() {
     this.msg = null;
     this.error = null;
-    this.bookService.book(this.bookForm.value).subscribe(
-      (res) => {
-        this.msg = res;
-        this.bookForm.reset();
-      }
-    );
+    try {
+      this.bookService.book(this.bookForm.value).then(
+        res => {
+          this.msg = JSON.stringify(res);
+          this.bookForm.reset();
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   unbook() {
     this.msg = null;
     this.error = null;
-    this.bookService.unbook(this.unbookForm.value).subscribe(
+    this.bookService.unbook(this.unbookForm.value).then(
       (res) => {
-        this.msg = res;
+        this.msg = JSON.stringify(res);
         this.currentBooking = null;
         this.unbookForm.reset();
       }
